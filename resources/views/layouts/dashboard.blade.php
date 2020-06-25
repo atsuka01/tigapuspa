@@ -559,6 +559,11 @@
                   <span class="site-menu-title">Laporan Metama</span>
                 </a>
               </li>
+              <li class="site-menu-item">
+              <a class="animsition-link" href="{{route('laporan.rheumapas')}}">
+                  <span class="site-menu-title">Laporan Rheumapas</span>
+                </a>
+              </li>
             </ul>
           </li>
               </li>

@@ -15,6 +15,8 @@ use App\LaporanLSYQty;
 use App\LaporanItemLsy;
 use App\LaporanMetama;
 use App\LaporanItemMetama;
+use App\LaporanItemRheu;
+use App\LaporanRheu;
 class LaporanController extends Controller
 {
     public function index()
@@ -251,5 +253,21 @@ class LaporanController extends Controller
 
         return view('laporan.metama',compact(array('laporan', 'laporanitemlsy', 'join')));
        
+    }
+    public function rheumapas()
+    {
+        $laporan= LaporanRheu::all();
+        $laporanitemlsy = LaporanItemRheu::all();
+        
+        $coba   = LaporanLSYQty::all();
+        $produk = LSY::get('produk');
+        $join = \DB::table('lsy')
+                    ->join('lporan_item_lsy', 'lporan_item_lsy.id_laporan_lsy', '=', 'lsy.id')
+                   
+                    ->get();
+       
+        
+
+        return view('laporan.rheumapas',compact(array('laporan', 'laporanitemlsy', 'join')));
     }
 }

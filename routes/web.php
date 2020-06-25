@@ -156,6 +156,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('laporan/lsy/print', 'LaporanController@lsyprint')->name('laporan.lsyprint');
        //laporan Metama
        Route::get('laporan/metama', 'LaporanController@laporanmetama')->name('laporan.metama');
+       //laporan rheumapas
+       Route::get('laporan/rheumapas', 'LaporanController@rheumapas')->name('laporan.rheumapas');
 
     });
         Route::get('/home_cs', 'HomeController@cs');

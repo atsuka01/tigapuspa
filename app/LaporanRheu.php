@@ -27,15 +27,15 @@ class LaporanRheu extends Model
    
     public static function getid()
     {
-        return $geid = \DB::table('lporan_lsy')->max('id');
+        return $geid = \DB::table('laporan_rheu')->max('id');
     }
     public static function getno()
     {
         return $geid = \DB::table('lporan_lsy')->max('no');
     }
-    public function laporanitemlsy()
+    public function laporanitemrheumapas()
     {
-        return $this->hasMany(LaporanItemLsy::class,'id_laporan_lsy');
+        return $this->hasMany(LaporanItemRheu::class,'id_laporan_rheu');
     }
     public function coba()
     {
