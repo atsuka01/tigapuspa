@@ -31,7 +31,7 @@ class LaporanRheu extends Model
     }
     public static function getno()
     {
-        return $geid = \DB::table('lporan_lsy')->max('no');
+        return $geid = \DB::table('laporan_rheu')->max('no');
     }
     public function laporanitemrheumapas()
     {

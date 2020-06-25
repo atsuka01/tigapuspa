@@ -30,7 +30,7 @@ bottom: .5em;
 <div class="col-md-12">
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Laporan Metama</h3>
+    <h3 class="panel-title">Laporan Rheumapas</h3>
   </div>
   <div class="panel-body">
     <div class="table-responsive">
@@ -53,7 +53,7 @@ bottom: .5em;
           <th rowspan="2">KETERANGAN</th>
         </tr>
         <tr align="center">
-          <td >MET</td>
+          <td >RHEU</td>
          
         </tr>
         @foreach ($laporan as $v)
@@ -86,7 +86,7 @@ bottom: .5em;
            <tr>
             <td>RHEU</td>
             <td>{{$laporanitemlsy->where('produk', 'RHEU')->sum('qtyin')}}</td>
-            <td>Rp.{{number_format($laporanitemlsy->where('produk', 'MET')->sum('jumlah'))}}</td>
+            <td>Rp.{{number_format($laporan->sum('jumlah'))}}</td>
           </tr>
           <tr>
             <td colspan="2">TOTAL</td>

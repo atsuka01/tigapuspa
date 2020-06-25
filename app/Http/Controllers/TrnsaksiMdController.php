@@ -11,6 +11,7 @@ use App\PenjualanMasterDealer;
 use App\User;
 use App\CostumerService;
 use PDF;
+use App\LaporanLSY;
 class TrnsaksiMdController extends Controller
 {
     public function index()
@@ -23,7 +24,42 @@ class TrnsaksiMdController extends Controller
     }
     public function store(Request $req)
     {    
-        
+        $id = LaporanLSY::getid();
+    
+        if ($req->kategori == "LSY") {
+            $data = new LaporanLSY;
+        $data->nama = $req->nama_customer;
+        $data->tanggal = $req->tanggal;
+        $data->alamat = $req->alamat_customer;
+        $data->kota   = $req->kota_kabupaten;
+        $data->kode_md_rs = $req->jenis_toko;
+        $data->telepon    = $req->notlp_customer;
+        $data->disc       = max($req->dis);
+        $data->jumlah     = $req->subtotal;
+        $data->cs         = $req->kode_cs;
+        $data->paking     = 'NITA';
+      
+        $data->nomor_invois = $x->nomor_invoice;
+        $data->no = LaporanLSY::getno() +1;
+
+        $data->save();
+        foreach ($req->kode_produk as $v => $value) {
+            $laporanlsyitem = array(
+                'id_laporan_lsy'=>LaporanLSY::getid(),
+                'produk'=>$req->kode_produk[$v],
+                'qtyin'=>$req->qty[$v],
+                'jumlah'=>$req->amount[$v]
+            );
+            LaporanItemLsy::insert($laporanlsyitem);
+
+        }
+        }else if($req->kategori == "MET"){
+            return "Buat Laporan MET";
+        }else if($req->kategori == "RHEU"){
+            return "buat laporan Rheumapas";
+        }else{
+            return "no";
+        }
         $rules = [
             
             'nama_toko'         =>'required',

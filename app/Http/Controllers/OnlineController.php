@@ -227,6 +227,7 @@ class OnlineController extends Controller
               $data->keterangan = '';
               $data->nomor_invois = $x->nomor_invoice;
               $data->no = LaporanRheu::getno() +1;
+             $data->save();
              
               foreach ($req->kode_produk as $v => $value) {
                   $LaporanItemRheu = array(
@@ -427,9 +428,66 @@ $messages = [
 
 
     } elseif($req->kategori == "MET") {
-        return  "Tamabh Laporan Metama";
+        $data = new LaporanMetama;
+              $data->nama = $req->nama_customer;
+              $data->tanggal = $req->tanggal;
+              $data->alamat = $req->alamat_customer;
+              $data->kota   = $req->kota_kabupaten;
+              $data->kode_md_rs = $req->jenis_toko;
+              $data->telepon    = $req->notlp_customer;
+              $data->disc       = max($req->dis);
+              $data->jumlah     = $req->subtotal;
+              $data->cs         = $req->kode_cs;
+              $data->paking     = 'NITA';
+              $data->keterangan = '';
+              $data->nomor_invois = $x->nomor_invoice;
+              $data->no = LaporanMetama::getno() +1;
+              $data->keterangan = 'Repeat';
+  
+              $data->save();
+  
+              foreach ($req->kode_produk as $v => $value) {
+                  $LaporanitemMetama = array(
+                      'id_laporan_metama'=>LaporanMetama::getid(),
+                      'produk'=>$req->kode_produk[$v],
+                      'qty'=>$req->qty[$v],
+                      'jumlah'=>$req->amount[$v]
+                  );
+  
+                  LaporanitemMetama::insert($LaporanitemMetama);
+  
+              }
+              return redirect('home_admin');
+
     }elseif($req->kategori == "RHEU"){
-        return "Tamabah Laporan Rheumapas";
+        $data = new LaporanRheu;
+        $data->nama = $req->nama_customer;
+        $data->tanggal = $req->tanggal;
+        $data->alamat = $req->alamat_customer;
+        $data->kota   = $req->kota_kabupaten;
+        $data->kode_md_rs = $req->jenis_toko;
+        $data->telepon    = $req->notlp_customer;
+        $data->disc       = max($req->dis);
+        $data->jumlah     = $req->subtotal;
+        $data->cs         = $req->kode_cs;
+        $data->paking     = 'NITA';
+        $data->keterangan = '';
+        $data->nomor_invois = $x->nomor_invoice;
+        $data->no = LaporanRheu::getno() +1;
+        $data->keterangan = 'Repeat';
+       $data->save();
+       
+        foreach ($req->kode_produk as $v => $value) {
+            $LaporanItemRheu = array(
+                'id_laporan_rheu'=>LaporanRheu::getid(),
+                'produk'=>$req->kode_produk[$v],
+                'qtyin'=>$req->qty[$v],
+                'jumlah'=>$req->amount[$v]
+            );
+           
+            LaporanItemRheu::insert($LaporanItemRheu);
+            return redirect('home_admin');
+        }
     }else{
         return "no";
     }
